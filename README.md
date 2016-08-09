@@ -1,12 +1,6 @@
 ## Node + Stripe + Express
 
-[![Build Status](https://travis-ci.org/mjhea0/node-stripe-charge.svg?branch=master)](https://travis-ci.org/mjhea0/node-stripe-charge)
-
-[![Coverage Status](https://coveralls.io/repos/github/mjhea0/node-stripe-charge/badge.svg?branch=master)](https://coveralls.io/github/mjhea0/node-stripe-charge?branch=master)
-
-This is a template for you to use on your own projects for processing one-time Stripe charges. Follow the directions below to get started.
-
-> Looking for a simple example? [Node Stripe Example](https://github.com/mjhea0/node-stripe-example)
+[![Build Status](https://travis-ci.org/nickwhite917/mctc-tkd.svg?branch=product-load)](https://travis-ci.org/nickwhite917/mctc-tkd)
 
 The back-end API includes:
 
