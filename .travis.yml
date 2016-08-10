@@ -13,18 +13,18 @@
  # cache node modules
  cache:
    directories:
-     - node_modules
+      node_modules
 
  before_install:
    # remove useless/non listed deps
-   - npm prune
+    npm prune
     # faster npm install
-    - npm set progress=false
+    npm set progress=false
 
- +  # nyc fail on npm@3.7.1. Remove this patch when node upgrade npm
- +  # https://github.com/bcoe/nyc/issues/190
- +  - npm install -g npm@latest
- +
+   # nyc fail on npm@3.7.1. Remove this patch when node upgrade npm
+   # https://github.com/bcoe/nyc/issues/190
+    npm install -g npm@latest
+
   script: npm run test
 
   after_success: '[ \"$TRAVIS_PULL_REQUEST\" != \"false\" ] && npm run coverage'
