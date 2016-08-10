@@ -1,10 +1,12 @@
 
- services: mongodb
+
 
  language: node_js
 
  node_js:
    - '5'
+
+
 
  # fail asap when there is a failure
  matrix:
@@ -17,17 +19,17 @@
 
  before_install:
    # remove useless/non listed deps
-    npm prune
+  - npm prune
     # faster npm install
-    npm set progress=false
+  - npm set progress=false
 
    # nyc fail on npm@3.7.1. Remove this patch when node upgrade npm
    # https://github.com/bcoe/nyc/issues/190
-    npm install -g npm@latest
+  - npm install -g npm@latest
 
-  script: npm run test
+ services: mongodb
 
-  after_success: '[ \"$TRAVIS_PULL_REQUEST\" != \"false\" ] && npm run coverage'
+ script: npm run test
 
 
 
