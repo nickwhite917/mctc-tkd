@@ -8,14 +8,13 @@ var seedProduct = function() {
     if(documents.length === 0){
 
       var prodArry = [
-        {productName: 'Large Shirt', productAmount: 30},
-        {productName: 'Medium Shirt', productAmount: 20},
-        {productName: 'Small Shirt', productAmount: 10}
+        {_id: "School", productName: 'School Registration', productAmount: 100}
       ];
 
       for (var i = 0; i < prodArry.length; i++) {
          var data = new Product(
           {
+			_id: prodArry[i]._id,
             name: prodArry[i].productName,
             amount: prodArry[i].productAmount,
             currency: 'USD',
