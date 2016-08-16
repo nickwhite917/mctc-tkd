@@ -26,7 +26,7 @@ router.get('/product/:id', function(req, res, next) {
       if(!req.user) {
         req.flash('message', {
           status: 'danger',
-          value: 'Please log in to Purchase!'
+          value: 'Please login to enable registration.'
         });
       }
       return res.render('product', {
@@ -75,7 +75,7 @@ router.post('/stripe', helpers.ensureAuthenticated, function(req, res, next) {
           if (err) {
             return next(err);
           } else {
-            data.products.push({ productID: req.body.productID, token: stripeToken });
+            data.products.push({productID: req.body.productID, token: stripeToken, productName: req.body.productName});
             data.save();
           }
         });
@@ -89,11 +89,20 @@ router.post('/stripe', helpers.ensureAuthenticated, function(req, res, next) {
         };
         stripe.charges.create(charge, function(err, charge) {
           if(err) {
+            //Rollback product
+            User.findById(userID, function (err, data) {
+              if (err) {
+                return next(err);
+              } else {
+                data.products.pop();
+                data.save();
+              }
+            });
             return next(err);
           } else {
             req.flash('message', {
               status: 'success',
-              value: 'Thanks for purchasing a '+req.body.productName+'!'
+              value: 'Thanks for registering! You now have registration for ' + req.body.productName + '!'
             });
             res.redirect('auth/profile');
           }
