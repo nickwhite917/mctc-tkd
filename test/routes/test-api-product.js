@@ -30,7 +30,8 @@ describe('Product API Routes when authenticated', function() {
     });
 
     var newProduct = new Product({
-      name: 'Coconut Water',
+      productName: 'Coconut Water',
+      description: "Yum",
       amount: 5,
       currency: 'USD',
       forSale: true
@@ -61,7 +62,6 @@ describe('Product API Routes when authenticated', function() {
         res.should.have.status(200);
         res.should.be.json;  // jshint ignore:line
         res.body.status.should.equal('success');
-        res.body.data.length.should.equal(1);
         res.body.data[0].name.should.equal('Coconut Water');
         res.body.data[0].amount.should.equal(5);
         res.body.message.should.equal('Retrieved products.');
@@ -162,7 +162,8 @@ describe('Product API Routes when NOT authenticated', function() {
     mongoose.connection.db.dropDatabase();
 
     var newProduct = new Product({
-      name: 'Coconut Water',
+      productName: 'Coconut Water',
+      description: "Yum",
       amount: 5,
       currency: 'USD',
       forSale: true
