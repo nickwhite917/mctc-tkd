@@ -7,7 +7,7 @@ var seedAdmin = function() {
     if (documents.length === 0){
       var password = 'admin';
       var user = new User({
-        email: 'ad@min.com',
+        email: 'nick@nickwhite.us',
         admin: true,
         password: password
       });

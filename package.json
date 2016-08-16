@@ -1,9 +1,9 @@
 {
   "name": "mctc-tkd",
   "version": "1.0.0",
-  "description": "stripe integration with node and express",
+  "description": "mctc-registration application",
   "scripts": {
-    "start": "node ./src/server/bin/www",
+    "start": "nodemon -e js,html ./src/server/bin/www",
     "test": "mocha"
   },
   "repository": {
@@ -20,7 +20,7 @@
     "bootstrap3",
     "stripe"
   ],
-  "author": "Michael Herman <michael@mherman.org>",
+  "author": "Nick White",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.3.0",
@@ -41,6 +41,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-stub": "1.0.1",
+    "q": "^1.4.1",
     "serve-favicon": "^2.3.0",
     "stripe": "^4.2.0",
     "swig": "^1.4.2"

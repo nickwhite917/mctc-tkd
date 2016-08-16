@@ -16,9 +16,18 @@ var User = new Schema({
     unique: true,
     lowercase: true
   },
+  firstName: {
+    type: String,
+    unique: false
+  },
+  lastName: {
+    type: String,
+    unique: false
+  },
   products: [
     {
       productID: String,
+      productName: String,
       token: String,
       time: { type: Date, default: Date.now }
     }

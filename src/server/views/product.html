@@ -6,12 +6,13 @@
 {% block content %}
 
 <div class="container">
-  <h1>{{product.name}}</h1>
-  <p class="lead">${{product.amount}}</p>
-  <a href="/products">Back to product list</a>
+  <h1>{{product.productName}}</h1>
+  <h2>{{product.description}}</h2>
+  <p class="lead">Cost ${{product.amount}}</p>
+  <a href="/products">Back to registrations list</a>
   <br><br>
   {% if user %}
-    <a class="btn btn-primary" href="/charge/{{product._id.toString()}}" role="button">Buy Now</a>
+  <a class="btn btn-primary" href="/charge/{{product._id.toString()}}" role="button">Register now</a>
   {% endif %}
 </div>
 

@@ -21,6 +21,8 @@ describe('Product API Routes when authenticated', function() {
     mongoose.connection.db.dropDatabase();
 
     var newUser = new User({
+      firstName: "Nick",
+      lastName: "White",
       email: 'test@test.com',
       password: 'test',
       admin: true,

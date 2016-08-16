@@ -1,18 +1,32 @@
 var express = require('express');
 var router = express.Router();
 
+var Product = require('../models/product.js');
+
 
 router.get('/', function(req, res, next) {
-  res.render('index', {
+  return res.render('index', {
     user: req.user,
     message: req.flash('message')[0]
   });
 });
 
-router.get('/ping', function(req, res, next) {
-  res.send("pong!");
+router.get('/registration', function (req, res, next) {
+  return Product.find({}, function (err, data) {
+    if (err) {
+      return next(err);
+    } else {
+      return res.render('registration', {
+        products: data,
+        user: req.user,
+        message: req.flash('message')[0]
+      });
+    }
+  });
 });
 
-
+router.get('/ping', function (req, res, next) {
+  res.send("Server is up!");
+});
 
 module.exports = router;

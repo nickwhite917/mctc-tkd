@@ -9,6 +9,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
 var mongoose = require('mongoose');
+mongoose.Promise = require('q').Promise;
+
 var swig = require('swig');
 var passport = require('./lib/auth');
 var LocalStrategy = require('passport-local').Strategy;

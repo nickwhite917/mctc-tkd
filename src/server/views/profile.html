@@ -6,18 +6,19 @@
 {% block content %}
 
 <div class="container">
-  <h1>Profile</h1>
-  <p class="lead">Welcome, {{user.email}}!</p>
+  <h1>Your Profile</h1>
+  <p class="lead">Welcome, {{user.firstName || user.email}}!</p>
   <a href="/">Go home</a>
   <br><br>
-  {% if user.products.length > 1 %}
-    <p>Products you've purchased:</p>
-    <br>
+  <h3>Your registrations</h3>
+  {% if user.products.length > 0 %}
     <ul>
     {% for product in user.products %}
-      <li>{{ product.productID }}</li>
+      <li>{{ product.productName }}</li>
     {% endfor %}
     </ul>
+  {% else %}
+  <p>Your registrations will show up here, head over to <a href="/registration">registration</a> to get started.</p>
   {% endif %}
 </div>
 
