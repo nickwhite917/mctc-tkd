@@ -16,10 +16,20 @@ var User = new Schema({
     unique: true,
     lowercase: true
   },
-  products: [
+  firstName: {
+    type: String,
+    unique: false
+  },
+  lastName: {
+    type: String,
+    unique: false
+  },
+  registrations: [
     {
-      productID: String,
+      _id: String,
+      registrationId: String,
       token: String,
+      raw_object: Object,
       time: { type: Date, default: Date.now }
     }
   ],
@@ -30,8 +40,20 @@ var User = new Schema({
   admin: {
     type: Boolean,
     default: false
+  },
+  school_name: {
+    type: String
+  },
+  is_coach: {
+    type: Boolean,
+    default: false
+  },
+  belt: {
+    type: String
   }
+
 });
+
 
 User.methods.generateHash = function(password, callback) {
   bcrypt.genSalt(10, function(err, salt) {

@@ -1,0 +1,32 @@
+{% extends '_base.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="col-md-12">
+        <h1>Register your school, or yourself as a coach</h1>
+        <div class="col-md-6">
+            <div class="list-group">
+                <a href="/register/school" class="list-group-item">
+                    <!--<a href="/competitor" class="list-group-item disabled">-->
+                    <h2 class="list-group-item-heading">School Registration</h2>
+                    <h4 class="list-group-item-text">Register your school</h4>
+                    <span class="label label-success">Open</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="list-group">
+                <a href="/register/coach" class="list-group-item">
+                    <h2 class="list-group-item-heading">Coach Registration</h2>
+                    <h4 class="list-group-item-text">Register yourself as a coach</h4>
+                    <span class="label label-success">Open</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

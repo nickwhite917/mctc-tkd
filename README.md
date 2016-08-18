@@ -1,5 +1,3 @@
-## Node + Stripe + Express
-
 [![Build Status](https://travis-ci.org/nickwhite917/mctc-tkd.svg?branch=product-load)](https://travis-ci.org/nickwhite917/mctc-tkd)
 
 The back-end API includes:

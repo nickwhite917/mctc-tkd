@@ -4,17 +4,38 @@
 
 
 {% block content %}
+<div class="container jumbotron">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Midwest Collegiate Taekwondo</h1>
+            <h2>Conference Registration</h2>
+            <!--<p class="lead">Register for the MCTC Championship!</p>-->
+            <br>
+            <div class="col-md-6">
+                <div class="list-group">
+                    <a href="/#" class="list-group-item disabled">
+                        <!--<a href="/competitor" class="list-group-item disabled">-->
+                        <h2 class="list-group-item-heading">Competitor Registration</h2>
+                        <p class="list-group-item-text">Black and color belts</p>
+                        <span class="label label-danger">Disabled</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="list-group">
+                    <a href="/school" class="list-group-item">
+                        <h2 class="list-group-item-heading">School and Coach Registration</h2>
+                        <p class="list-group-item-text">Institutions, coaches, and instructors</p>
+                        <span class="label label-success">Open</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12 text-center">
-      <img src="{{ baseurl }}/img/stripe-logo.png">
-      <h1>Node + Stripe + Express</h1>
-      <p class="lead">Go make some money.</p>
-      <br>
-      <a href="/ping">Ping</a>
-    </div>
-  </div>
+
 </div>
 
 {% endblock %}

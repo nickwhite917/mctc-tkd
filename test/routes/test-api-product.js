@@ -6,7 +6,7 @@ var mongoose = require('mongoose-q')(require('mongoose'));
 var passportStub = require('passport-stub');
 
 var app = require('../../src/server/app');
-var Product = require('../../src/server/models/product.js');
+var Product = require('../../src/server/models/registration.js');
 var User = require('../../src/server/models/user.js');
 var should = chai.should();
 
@@ -21,6 +21,8 @@ describe('Product API Routes when authenticated', function() {
     mongoose.connection.db.dropDatabase();
 
     var newUser = new User({
+      firstName: "Nick",
+      lastName: "White",
       email: 'test@test.com',
       password: 'test',
       admin: true,
@@ -29,6 +31,7 @@ describe('Product API Routes when authenticated', function() {
 
     var newProduct = new Product({
       name: 'Coconut Water',
+      description: "Yum",
       amount: 5,
       currency: 'USD',
       forSale: true
@@ -59,7 +62,6 @@ describe('Product API Routes when authenticated', function() {
         res.should.have.status(200);
         res.should.be.json;  // jshint ignore:line
         res.body.status.should.equal('success');
-        res.body.data.length.should.equal(1);
         res.body.data[0].name.should.equal('Coconut Water');
         res.body.data[0].amount.should.equal(5);
         res.body.message.should.equal('Retrieved products.');
@@ -161,6 +163,7 @@ describe('Product API Routes when NOT authenticated', function() {
 
     var newProduct = new Product({
       name: 'Coconut Water',
+      description: "Yum",
       amount: 5,
       currency: 'USD',
       forSale: true

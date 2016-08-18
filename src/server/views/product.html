@@ -6,13 +6,39 @@
 {% block content %}
 
 <div class="container">
-  <h1>{{product.name}}</h1>
-  <p class="lead">${{product.amount}}</p>
-  <a href="/products">Back to product list</a>
+  <h1>{{product.productName}}</h1>
+  <h2>{{product.description}}</h2>
+  <p class="lead">Cost ${{product.amount}}</p>
+  <a href="/products">Back to registrations list</a>
   <br><br>
   {% if user %}
-    <a class="btn btn-primary" href="/charge/{{product._id.toString()}}" role="button">Buy Now</a>
+  <a class="btn btn-primary" href="/charge/{{product._id.toString()}}" role="button">Register now</a>
   {% endif %}
+</div>
+
+<div class="container">
+  <div class="well well-lg">
+    <form class="form-horizontal" role="form" action="/product/{{product._id.toString()}}" method="post">
+      <fieldset>
+        <legend>{{product.productName}} Registration</legend>
+        {{ for field in product.formFields }}
+        <div class="form-group">
+          <label for="{{field.name}}" class="col-lg-2 control-label">{{field.displayName}}</label>
+          <div class="col-lg-10">
+            <input type="{{field.inputType}}" class="form-control" name="{{field.name}}"
+                   placeholder="{{field.displayName}}" {{field.requiredStatus}}>
+          </div>
+        </div>
+        {{ endfor }}
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+            <button type="reset" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-primary">Next</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 </div>
 
 {% endblock %}
