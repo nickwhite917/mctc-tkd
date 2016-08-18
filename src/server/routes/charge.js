@@ -17,6 +17,17 @@ router.get('/products', function(req, res, next){
   });
 });
 
+//todo
+router.post('/products', function (req, res, next) {
+  return Product.find({}, function (err, data) {
+    if (err) {
+      return next(err);
+    } else {
+      return res.render('products', {products: data, user: req.user});
+    }
+  });
+});
+
 router.get('/product/:id', function(req, res, next) {
   var productID = req.params.id;
   Product.findById(productID, function(err, data) {

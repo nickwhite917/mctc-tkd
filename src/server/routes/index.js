@@ -25,8 +25,4 @@ router.get('/registration', function (req, res, next) {
   });
 });
 
-router.get('/ping', function (req, res, next) {
-  res.send("Server is up!");
-});
-
 module.exports = router;
