@@ -34,7 +34,6 @@ var mainRoutes = require('./routes/index');
 var authRoutes = require('./routes/auth');
 var chargeRoutes = require('./routes/charge');
 var productAPIRoutes = require('./routes/api/product');
-var storeAPIRoutes = require('./routes/api/store');
 var userAPIRoutes = require('./routes/api/user');
 
 
@@ -86,7 +85,6 @@ app.use('/', mainRoutes);
 app.use('/', chargeRoutes);
 app.use('/auth', authRoutes);
 app.use('/api/v1/', productAPIRoutes);
-app.use('/api/v1/', storeAPIRoutes);
 app.use('/api/v1/', userAPIRoutes);
 
 
