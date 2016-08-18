@@ -18,22 +18,8 @@ describe('index.js Routes', function(){
       .end(function(err, res){
         res.should.have.status(200);
         res.should.be.html;  // jshint ignore:line
-        res.text.should.contain.contain('<h1>Node + Stripe + Express</h1>');
         done();
       });
     });
   });
-
-  describe('GET /ping', function(){
-    it('should return a view', function(done){
-      chai.request(app)
-      .get('/ping')
-      .end(function(err, res){
-        res.should.have.status(200);
-        res.text.should.contain.equal('pong!');
-        done();
-      });
-    });
-  });
-
 });
