@@ -9,6 +9,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
 var mongoose = require('mongoose');
+mongoose.Promise = require('q').Promise;
+
 var swig = require('swig');
 var passport = require('./lib/auth');
 var LocalStrategy = require('passport-local').Strategy;
@@ -17,9 +19,9 @@ var LocalStrategy = require('passport-local').Strategy;
 // *** seed the database *** //
 if (process.env.NODE_ENV === 'development') {
   var seedAdmin = require('./models/seeds/admin.js');
-  var productAdmin = require('./models/seeds/product.js');
+  var registrationAdmin = require('./models/seeds/registration.js');
   seedAdmin();
-  productAdmin();
+  registrationAdmin();
 }
 
 
@@ -29,10 +31,11 @@ var config = require('../_config');
 
 // *** routes *** //
 var mainRoutes = require('./routes/index');
+var competitorRoutes = require('./routes/competitor');
+var schoolRoutes = require('./routes/school');
 var authRoutes = require('./routes/auth');
 var chargeRoutes = require('./routes/charge');
-var productAPIRoutes = require('./routes/api/product');
-var storeAPIRoutes = require('./routes/api/store');
+var registrationAPIRoutes = require('./routes/api/registration');
 var userAPIRoutes = require('./routes/api/user');
 
 
@@ -81,10 +84,11 @@ mongoose.connect(app.get('dbUrl'));
 
 // *** main routes *** //
 app.use('/', mainRoutes);
+app.use('/competitor', competitorRoutes);
+app.use('/school', schoolRoutes);
 app.use('/', chargeRoutes);
 app.use('/auth', authRoutes);
-app.use('/api/v1/', productAPIRoutes);
-app.use('/api/v1/', storeAPIRoutes);
+app.use('/api/v1/', registrationAPIRoutes);
 app.use('/api/v1/', userAPIRoutes);
 
 

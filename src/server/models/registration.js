@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var Product = new Schema({
-  name: String,
+var Registration = new Schema({
+  _id: String,
   amount: Number,
   currency: {
     type: String,
@@ -14,4 +14,4 @@ var Product = new Schema({
   }
 });
 
-module.exports = mongoose.model('products', Product);
+module.exports = mongoose.model('registrations', Registration);
