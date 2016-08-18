@@ -4,21 +4,21 @@ var mongoose = require('mongoose-q')(require('mongoose'));
 
 var passport = require('../../lib/auth');
 var helpers = require('../../lib/helpers');
-var Product = require('../../models/product');
+var Registration = require('../../models/registration');
 
 
 // ** products ** //
 
 // get ALL products
-router.get('/products', helpers.ensureAdminJSON,
+router.get('/registrations', helpers.ensureAdminJSON,
   function(req, res, next) {
-  Product.findQ()
-  .then(function(products) {
+    Registration.findQ()
+        .then(function (registrations) {
     res.status(200)
     .json({
       status: 'success',
-      data: products,
-      message: 'Retrieved products.'
+      data: registrations,
+      message: 'Retrieved registrations.'
     });
   })
   .catch(function(err) {
@@ -28,9 +28,9 @@ router.get('/products', helpers.ensureAdminJSON,
 });
 
 // get SINGLE product
-router.get('/products/:id', helpers.ensureAdminJSON,
+router.get('/registration/:id', helpers.ensureAdminJSON,
   function(req, res, next) {
-  Product.findByIdQ(req.params.id)
+    Registration.findByIdQ(req.params.id)
   .then(function(product) {
     res.status(200)
     .json({
@@ -46,13 +46,13 @@ router.get('/products/:id', helpers.ensureAdminJSON,
 });
 
 // add new product
-router.post('/products', helpers.ensureAdminJSON,
+router.post('/registration', helpers.ensureAdminJSON,
   function(req, res, next) {
-  var product = new Product({
+    var registration = new Registration({
     name: req.body.name,
     amount: req.body.amount
   });
-  product.saveQ()
+    registration.saveQ()
   .then(function(result) {
     res.status(200)
     .json({
@@ -68,12 +68,12 @@ router.post('/products', helpers.ensureAdminJSON,
 });
 
 // update SINGLE product
-router.put('/products/:id', helpers.ensureAdminJSON,
+router.put('/registration/:id', helpers.ensureAdminJSON,
   function(req, res, next) {
   var id = req.params.id;
   var update = req.body;
   var options = {new:true, upsert:true};
-  Product.findByIdAndUpdateQ(id, update, options)
+    Registration.findByIdAndUpdateQ(id, update, options)
   .then(function(result) {
     res.status(200)
     .json({
@@ -89,9 +89,9 @@ router.put('/products/:id', helpers.ensureAdminJSON,
 });
 
 // delete SINGLE product
-router.delete('/products/:id', helpers.ensureAdminJSON,
+router.delete('/registration/:id', helpers.ensureAdminJSON,
   function(req, res, next) {
-  Product.findByIdAndRemoveQ(req.params.id)
+    Registration.findByIdAndRemoveQ(req.params.id)
   .then(function(product) {
     res.status(200)
     .json({

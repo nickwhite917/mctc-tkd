@@ -26,9 +26,10 @@ var User = new Schema({
   },
   registrations: [
     {
-      type: String,
-      description: String,
+      _id: String,
+      registrationId: String,
       token: String,
+      raw_object: Object,
       time: { type: Date, default: Date.now }
     }
   ],

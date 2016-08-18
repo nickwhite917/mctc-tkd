@@ -11,14 +11,14 @@
   <a href="/">Go home</a>
   <br><br>
   <h3>Your registrations</h3>
-  {% if user.products.length > 0 %}
+  {% if user.registrations.length > 0 %}
     <ul>
-    {% for product in user.products %}
-      <li>{{ product.productName }}</li>
+      {% for registration in user.registrations %}
+      <li>{{ registration._id }}</li>
     {% endfor %}
     </ul>
   {% else %}
-  <p>Your registrations will show up here, head over to <a href="/registration">registration</a> to get started.</p>
+  <p>Your registrations will show up here, head over to registration to get started.</p>
   {% endif %}
 </div>
 

@@ -6,7 +6,7 @@ var mongoose = require('mongoose-q')(require('mongoose'));
 var passportStub = require('passport-stub');
 
 var app = require('../../src/server/app');
-var Product = require('../../src/server/models/product.js');
+var Product = require('../../src/server/models/registration.js');
 var User = require('../../src/server/models/user.js');
 var should = chai.should();
 
@@ -30,7 +30,7 @@ describe('Product API Routes when authenticated', function() {
     });
 
     var newProduct = new Product({
-      productName: 'Coconut Water',
+      name: 'Coconut Water',
       description: "Yum",
       amount: 5,
       currency: 'USD',
@@ -162,7 +162,7 @@ describe('Product API Routes when NOT authenticated', function() {
     mongoose.connection.db.dropDatabase();
 
     var newProduct = new Product({
-      productName: 'Coconut Water',
+      name: 'Coconut Water',
       description: "Yum",
       amount: 5,
       currency: 'USD',

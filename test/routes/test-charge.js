@@ -6,7 +6,7 @@ var mongoose = require('mongoose-q')(require('mongoose'));
 var passportStub = require('passport-stub');
 
 var app = require('../../src/server/app');
-var Product = require('../../src/server/models/product.js');
+var Product = require('../../src/server/models/registration.js');
 var should = chai.should();
 
 chai.use(chaiHttp);

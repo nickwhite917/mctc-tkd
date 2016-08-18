@@ -101,9 +101,9 @@ router.get('/admin', helpers.ensureAuthenticated, function(req, res){
     } else {
       var allProducts = [];
       for (var i = 0; i < data.length; i++) {
-        if (data[i].products.length > 0) {
-          for (var j = 0; j < data[i].products.length; j++) {
-            allProducts.push(data[i].products[j]);
+        if (data[i].registrations.length > 0) {
+          for (var j = 0; j < data[i].registrations.length; j++) {
+            allProducts.push(data[i].registrations[j]);
           }
         }
       }

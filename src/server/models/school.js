@@ -7,9 +7,8 @@ var School = new Schema({
 		required: true
 	},
 	updated: {type: Date, default: Date.now},
-	Coaches: {
-		type: Array,
-		required: true
+	coaches: {
+		type: []
 	},
 	contact_email: {
 		type: String,
