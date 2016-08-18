@@ -24,10 +24,10 @@ var User = new Schema({
     type: String,
     unique: false
   },
-  products: [
+  registrations: [
     {
-      productID: String,
-      productName: String,
+      type: String,
+      description: String,
       token: String,
       time: { type: Date, default: Date.now }
     }
@@ -39,7 +39,18 @@ var User = new Schema({
   admin: {
     type: Boolean,
     default: false
+  },
+  school_name: {
+    type: String
+  },
+  is_coach: {
+    type: Boolean,
+    default: false
+  },
+  belt: {
+    type: String
   }
+
 });
 
 
