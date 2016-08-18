@@ -42,6 +42,7 @@ var User = new Schema({
   }
 });
 
+
 User.methods.generateHash = function(password, callback) {
   bcrypt.genSalt(10, function(err, salt) {
     if (err) {
