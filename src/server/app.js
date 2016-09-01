@@ -71,7 +71,7 @@ app.use(compression());
 // *** mongo *** //
 app.set('dbUrl', config.mongoURI[app.settings.env]);
 mongoose.connect(app.get('dbUrl'));
-
+console.log("connected");
 app.use(session({
   resave: true,
   saveUninitialized: true,
@@ -81,6 +81,7 @@ app.use(session({
     autoReconnect: true
   })
 }));
+console.log("created mongostore");
 
 app.use(passport.initialize());
 app.use(passport.session());
