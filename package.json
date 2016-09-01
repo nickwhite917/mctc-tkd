@@ -1,7 +1,7 @@
 {
   "name": "mctc-tkd",
   "version": "1.0.0",
-  "description": "mctc-registration application",
+  "description": "mctc-registration application beta",
   "scripts": {
     "start": "nodemon -e js,html ./src/server/bin/www",
     "test": "mocha"
