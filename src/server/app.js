@@ -24,12 +24,10 @@ var LocalStrategy = require('passport-local').Strategy;
 
 
 // *** seed the database *** //
-if (process.env.NODE_ENV === 'development') {
   var seedAdmin = require('./components/admin/admin.model.seed.js');
   var registrationAdmin = require('./components/registration/registration.model.seed.js');
   seedAdmin();
   registrationAdmin();
-}
 
 
 // *** config file *** //
@@ -67,7 +65,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  secret: process.env.SECRET_KEY || 'change_me',
+  secret: process.env.SECRET_KEY || 'afeohseoeooo',
   resave: false,
   saveUninitialized: true
 }));

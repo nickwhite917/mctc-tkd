@@ -5,7 +5,7 @@ var User = require('../user/user.model');
 var seedAdmin = function() {
   User.find({}, function(err, documents) {
     if (documents.length === 0){
-      var password = 'admin';
+      var password = 'admin12';
       var user = new User({
         email: 'nick@nickwhite.us',
         admin: true,
