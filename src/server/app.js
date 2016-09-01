@@ -26,10 +26,10 @@ var LocalStrategy = require('passport-local').Strategy;
 
 
 // *** seed the database *** //
-  var seedAdmin = require('./components/admin/admin.model.seed.js');
-  var registrationAdmin = require('./components/registration/registration.model.seed.js');
-  seedAdmin();
-  registrationAdmin();
+var seedAdmin = require('./components/admin/admin.model.seed.js');
+var registrationAdmin = require('./components/registration/registration.model.seed.js');
+seedAdmin();
+registrationAdmin();
 
 
 // *** config file *** //
@@ -47,6 +47,19 @@ var stripeRoutes = require('./components/stripe/stripe.routes.js');
 // *** express instance *** //
 var app = express();
 
+var sess = {
+  secret: 'keyboardcatlikestaekwondo',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+}
+
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1) // trust first proxy 
+  sess.cookie.secure = true // serve secure cookies 
+}
+
+app.use(session(sess));
 
 // *** view engine *** ///
 swig = new swig.Swig();
@@ -66,13 +79,9 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({
-  secret: process.env.SECRET_KEY || 'afeohseoeooo',
-  resave: false,
-  saveUninitialized: true
-}));
+
 app.use(flash());
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
   res.locals.success = req.flash('success');
   res.locals.danger = req.flash('danger');
   next();
@@ -98,7 +107,7 @@ app.use('/auth', authRoutes);
 // *** error handlers *** //
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -107,18 +116,18 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('common/error', {
       message: err.message,
       error: err
-    }); 
+    });
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("/common/error", {
     message: err.message,
