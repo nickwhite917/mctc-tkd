@@ -10,16 +10,18 @@ var express = require('express');
 var compression = require('compression');
 var session = require('express-session');
 
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
 var MongoStore = require('connect-mongo')(session);
 
 
 var path = require('path');
 var morgan = require('morgan');
 
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 
-var session = require('express-session');
+
+
 
 var flash = require('connect-flash');
 
@@ -27,6 +29,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
 var swig = require('swig');
+
 var passport = require('./lib/auth');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -72,10 +75,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compression());
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.static(path.join(__dirname, '../', 'client')));
-
 
 // *** mongo *** //
 app.set('dbUrl', config.mongoURI[app.settings.env]);
@@ -90,6 +89,10 @@ app.use(session({
     autoReconnect: true
   })
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.static(path.join(__dirname, '../', 'client')));
 
 app.use(flash());
 app.use(function (req, res, next) {
