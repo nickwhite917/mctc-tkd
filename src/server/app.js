@@ -7,6 +7,12 @@ if (process.env.NODE_ENV !== 'production') {
 
 var express = require('express');
 
+var compression = require('compression');
+var session = require('express-session');
+
+var MongoStore = require('connect-mongo')(session);
+
+
 var path = require('path');
 var morgan = require('morgan');
 
@@ -47,20 +53,6 @@ var stripeRoutes = require('./components/stripe/stripe.routes.js');
 // *** express instance *** //
 var app = express();
 
-var sess = {
-  secret: 'keyboardcatlikestaekwondo',
-  cookie: {},
-  resave: false,
-  saveUninitialized: true,
-}
-
-if (process.env.NODE_ENV === 'production') {
-  app.set('trust proxy', 1) // trust first proxy 
-  sess.cookie.secure = true // serve secure cookies 
-}
-
-app.use(session(sess));
-
 // *** view engine *** ///
 swig = new swig.Swig();
 app.engine('html', swig.renderFile);
@@ -79,13 +71,7 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-app.use(flash());
-app.use(function (req, res, next) {
-  res.locals.success = req.flash('success');
-  res.locals.danger = req.flash('danger');
-  next();
-});
+app.use(compression());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, '../', 'client')));
@@ -94,6 +80,23 @@ app.use(express.static(path.join(__dirname, '../', 'client')));
 // *** mongo *** //
 app.set('dbUrl', config.mongoURI[app.settings.env]);
 mongoose.connect(app.get('dbUrl'));
+
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET,
+  store: new MongoStore({
+    url: app.get('dbUrl'),
+    autoReconnect: true
+  })
+}));
+
+app.use(flash());
+app.use(function (req, res, next) {
+  res.locals.success = req.flash('success');
+  res.locals.danger = req.flash('danger');
+  next();
+});
 
 
 // *** main routes *** //
