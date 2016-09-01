@@ -13,8 +13,6 @@ var session = require('express-session');
 // var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var MongoStore = require('connect-mongo')(session);
-
 
 var path = require('path');
 var morgan = require('morgan');
@@ -67,11 +65,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(cookieParser());
 app.use(compression());
 
-
-// *** mongo *** //
-app.set('dbUrl', config.mongoURI[app.settings.env]);
-mongoose.connect(app.get('dbUrl'));
-console.log("connected");
+var MongoStore = require('connect-mongo')(session);
 app.use(session({
   resave: true,
   saveUninitialized: true,
@@ -81,7 +75,10 @@ app.use(session({
     autoReconnect: true
   })
 }));
-console.log("created mongostore");
+
+// *** mongo *** //
+app.set('dbUrl', config.mongoURI[app.settings.env]);
+mongoose.connect(app.get('dbUrl'));
 
 app.use(passport.initialize());
 app.use(passport.session());

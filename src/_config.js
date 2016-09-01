@@ -4,7 +4,7 @@ var config = {};
 config.mongoURI = {
   development: "mongodb://localhost/mctc-tkd-dev",
   test: "mongodb://localhost/mctc-tkd-test",
-  production: process.env.MONGOLAB_URI
+  production: process.env.MONGODB_URI
 };
 
 module.exports = config;
