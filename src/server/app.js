@@ -32,14 +32,6 @@ var swig = require('swig');
 
 var passport = require('./lib/auth');
 
-
-// *** seed the database *** //
-var seedAdmin = require('./components/admin/admin.model.seed.js');
-var registrationAdmin = require('./components/registration/registration.model.seed.js');
-seedAdmin();
-registrationAdmin();
-
-
 // *** config file *** //
 var config = require('../_config');
 
@@ -101,6 +93,11 @@ app.use(function (req, res, next) {
   next();
 });
 
+// *** seed the database *** //
+var seedAdmin = require('./components/admin/admin.model.seed.js');
+var registrationAdmin = require('./components/registration/registration.model.seed.js');
+seedAdmin();
+registrationAdmin();
 
 // *** main routes *** //
 app.use('/', mainRoutes);
