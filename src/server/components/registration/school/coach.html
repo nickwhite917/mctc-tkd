@@ -1,0 +1,127 @@
+{% extends '../../common/_base.html' %} {% block title %}{% endblock %} {% block content %}
+
+<div class="container">
+
+
+    <div class="row">
+        <h1>Coach Registration</h1>
+        <form class="form-horizontal" id="payment-form" role="form" autocomplete="on" action="/stripe" method="POST">
+            <input type="hidden" name="_id" value="Coach" />
+            <input type="hidden" name="amount" value="20" />
+
+            <fieldset>
+                <div class="col-md-6 well">
+                    <legend>Registration Information</legend>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="schoolId">School</label>
+                        <div class="col-md-8">
+                            <p class="text-warning">If your school is not shown, please ask your head instructor to register your school before you register.</p>
+                            <select id="schoolId" name="schoolId" class="form-control input-md" required="true">
+                                {% for option in options %}
+                                    <option>{{option.school_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="coachName">Coach Name</label>
+                        <div class="col-md-8">
+                            <input id="coachName" name="coachName" type="text" placeholder="Name" class="form-control input-md" required="true">
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="schoolEmail">School Email</label>
+                        <div class="col-md-8">
+                            <input id="schoolEmail" name="schoolEmail" type="text" placeholder="Email" class="form-control input-md" required="true">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="schoolAddress">School Street Address</label>
+                        <div class="col-md-8">
+                            <input id="schoolAddress" name="schoolAddress" type="text" placeholder="Address" class="form-control input-md" required="true">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="schoolCity">City</label>
+                        <div class="col-md-8">
+                            <input id="schoolCity" name="schoolCity" type="text" placeholder="City" class="form-control input-md" required="true">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="schoolState">State</label>
+                        <div class="col-md-8">
+                            <input id="schoolState" name="schoolState" type="text" placeholder="State" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="schoolZip">Zip</label>
+                        <div class="col-md-8">
+                            <input id="schoolZip" name="schoolZip" type="text" placeholder="Zip" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="instructorPhone">Head Instructor Phone</label>
+                        <div class="col-md-8">
+                            <input id="instructorPhone" name="instructorPhone" type="text" placeholder="Phone" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6 well">
+                    <legend>Payment Information</legend>
+                    <div id="charge-error" class="alert alert-danger payment-errors"></div>
+                    <div class="form-group">
+                        <label>Credit Card</label>
+                        <input type="tel" class="form-control card-number cc-number input-md" data-stripe="number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control cc-cvc card-cvc input-md" data-stripe="cvc" autocomplete="off" placeholder="CVC" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Card Expiration Date</label>
+                        <input type="text" data-stripe="exp-month" placeholder="MM" class="card-expiry-month form-control input-md" required>
+                        <input type="text" data-stripe="exp-year" placeholder="YYYY" class="card-expiry-year form-control input-md" required>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">You are registering a coach for a school.</div>
+                        <div class="panel-body">
+                            <h3>Registration Cost</h3>
+                            <h3 class="text-primary">$20</h3>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-default submit-button btn-block">Submit</button>
+                <!--<p class="text-muted">By submitting your payment you agree to the <a href="">terms and conditions</a> of this sale</p>
+                -->
+                <!--todo-->
+            </div>
+        </form>
+    </div>
+</div>
+<br> {% endblock %} {% block js %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js" type="text/javascript"></script>
+<script src="{{ baseurl }}/js/validation.js" type="text/javascript"></script> {% endblock %}

@@ -1,13 +1,20 @@
 // *** main dependencies *** //
+
+
 require('dotenv').load();
 
 var express = require('express');
+
 var path = require('path');
 var morgan = require('morgan');
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 var session = require('express-session');
+
 var flash = require('connect-flash');
+
 var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
@@ -18,8 +25,8 @@ var LocalStrategy = require('passport-local').Strategy;
 
 // *** seed the database *** //
 if (process.env.NODE_ENV === 'development') {
-  var seedAdmin = require('./models/seeds/admin.js');
-  var registrationAdmin = require('./models/seeds/registration.js');
+  var seedAdmin = require('./components/admin/admin.model.seed.js');
+  var registrationAdmin = require('./components/registration/registration.model.seed.js');
   seedAdmin();
   registrationAdmin();
 }
@@ -30,13 +37,11 @@ var config = require('../_config');
 
 
 // *** routes *** //
-var mainRoutes = require('./routes/index');
-var competitorRoutes = require('./routes/competitor');
-var schoolRoutes = require('./routes/school');
-var authRoutes = require('./routes/auth');
-var chargeRoutes = require('./routes/charge');
-var registrationAPIRoutes = require('./routes/api/registration');
-var userAPIRoutes = require('./routes/api/user');
+var mainRoutes = require('./components/main/index.routes.js');
+var registrationRoutes = require('./components/registration/registration.routes.js');
+var authRoutes = require('./components/auth/auth.routes.js');
+var stripeRoutes = require('./components/stripe/stripe.routes.js');
+// var userAPIRoutes = require('./components/user/user.routes.js');
 
 
 // *** express instance *** //
@@ -50,7 +55,7 @@ app.set('view engine', 'html');
 
 
 // *** static directory *** ///
-app.set('views', path.join(__dirname, './views'));
+app.set('views', path.join(__dirname, './components'));
 
 
 // *** config middleware *** //
@@ -84,12 +89,10 @@ mongoose.connect(app.get('dbUrl'));
 
 // *** main routes *** //
 app.use('/', mainRoutes);
-app.use('/competitor', competitorRoutes);
-app.use('/school', schoolRoutes);
-app.use('/', chargeRoutes);
+app.use('/registration', registrationRoutes);
+app.use('/', stripeRoutes);
 app.use('/auth', authRoutes);
-app.use('/api/v1/', registrationAPIRoutes);
-app.use('/api/v1/', userAPIRoutes);
+// app.use('/api/v1/', userAPIRoutes);
 
 
 // *** error handlers *** //
@@ -106,10 +109,10 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('common/error', {
       message: err.message,
       error: err
-    });
+    }); 
   });
 }
 
@@ -117,7 +120,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.render("/common/error", {
     message: err.message,
     error: {}
   });

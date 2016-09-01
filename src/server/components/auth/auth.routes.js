@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 var moment = require('moment');
 
-var passport = require('../lib/auth');
-var helpers = require('../lib/helpers');
-var User = require('../models/user');
+var passport = require('../../lib/auth');
+var helpers = require('../../lib/helpers');
+var User = require('../user/user.model');
 
 
 router.get('/register', function(req, res, next){
-  res.render('register', {
+  res.render('auth/register', {
     user: req.user,
     message: req.flash('message')[0]
   });
@@ -47,7 +47,7 @@ router.post('/register', function(req, res, next) {
 });
 
 router.get('/login', helpers.loginRedirect, function(req, res, next){
-  res.render('login', {
+  res.render('auth/login', {
     user: req.user,
     message: req.flash('message')[0]
   });
@@ -88,7 +88,7 @@ router.get('/logout', helpers.ensureAuthenticated, function(req, res){
 });
 
 router.get('/profile', helpers.ensureAuthenticated, function(req, res){
-  res.render('profile', {
+  res.render('user/profile', {
     user: req.user,
     message: req.flash('message')[0]
   });
@@ -108,7 +108,7 @@ router.get('/admin', helpers.ensureAuthenticated, function(req, res){
         }
       }
       allProducts.reverse();
-      return res.render('admin', {data: allProducts, moment: moment, user: req.user});
+      return res.render('../admin/admin', {data: allProducts, moment: moment, user: req.user});
     }
   });
 });

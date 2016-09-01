@@ -1,5 +1,5 @@
 var passport = require('passport');
-var User = require('../user');
+var User = require('../user/user.model');
 
 
 var seedAdmin = function() {
