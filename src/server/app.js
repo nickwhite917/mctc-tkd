@@ -10,7 +10,7 @@ var express = require('express');
 var compression = require('compression');
 var session = require('express-session');
 
-var cookieParser = require('cookie-parser');
+// var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var MongoStore = require('connect-mongo')(session);
@@ -31,7 +31,6 @@ mongoose.Promise = require('q').Promise;
 var swig = require('swig');
 
 var passport = require('./lib/auth');
-var LocalStrategy = require('passport-local').Strategy;
 
 
 // *** seed the database *** //
@@ -73,8 +72,9 @@ if (process.env.NODE_ENV !== 'test') {
 }
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(compression());
+
 
 // *** mongo *** //
 app.set('dbUrl', config.mongoURI[app.settings.env]);
