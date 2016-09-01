@@ -86,7 +86,7 @@ app.use(session({
   saveUninitialized: true,
   secret: process.env.SESSION_SECRET,
   store: new MongoStore({
-    url: app.get('dbUrl'),
+    mongooseConnection: mongoose.connection,
     autoReconnect: true
   })
 }));
