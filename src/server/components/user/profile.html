@@ -1,4 +1,4 @@
-{% extends '_base.html' %}
+{% extends '../common/_base.html' %}
 
 {% block title %}{% endblock %}
 
@@ -8,18 +8,18 @@
 <div class="container">
   <h1>Your Profile</h1>
   <p class="lead">Welcome, {{user.firstName || user.email}}!</p>
-  <a href="/">Go home</a>
-  <br><br>
   <h3>Your registrations</h3>
   {% if user.registrations.length > 0 %}
-    <ul>
+    <ol>
       {% for registration in user.registrations %}
-      <li>{{ registration._id }}</li>
+      <li>Registered a {{ registration._id }} at {{ registration.time.toString()}}</li>
     {% endfor %}
-    </ul>
+    </ol>
   {% else %}
-  <p>Your registrations will show up here, head over to registration to get started.</p>
+  <p>Your registrations will show up here - head over to registration to get started.</p>
   {% endif %}
+  <br>
+  <a href="/">Home</a>
 </div>
 
 {% endblock %}

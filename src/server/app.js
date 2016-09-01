@@ -38,11 +38,9 @@ var config = require('../_config');
 
 // *** routes *** //
 var mainRoutes = require('./components/main/index.routes.js');
-// var competitorRoutes = require('./components/registration/competitor.routes.js');
-// var schoolRoutes = require('./components/registration/school.routes.js');
-// var authRoutes = require('./components/auth/auth.routes.js');
-// var stripeRoutes = require('./components/stripe.routes.js');
-// var registrationAPIRoutes = require('./components/registration/registration.routes.js');
+var registrationRoutes = require('./components/registration/registration.routes.js');
+var authRoutes = require('./components/auth/auth.routes.js');
+var stripeRoutes = require('./components/stripe/stripe.routes.js');
 // var userAPIRoutes = require('./components/user/user.routes.js');
 
 
@@ -91,11 +89,9 @@ mongoose.connect(app.get('dbUrl'));
 
 // *** main routes *** //
 app.use('/', mainRoutes);
-// app.use('/competitor', competitorRoutes);
-// app.use('/school', schoolRoutes);
-// app.use('/', stripeRoutes);
-// app.use('/auth', authRoutes);
-// app.use('/api/v1/', registrationAPIRoutes);
+app.use('/registration', registrationRoutes);
+app.use('/', stripeRoutes);
+app.use('/auth', authRoutes);
 // app.use('/api/v1/', userAPIRoutes);
 
 
@@ -120,15 +116,15 @@ if (app.get('env') === 'development') {
   });
 }
 
-// // production error handler
-// // no stacktraces leaked to user
-// app.use(function(err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.render("/common/error", {
-//     message: err.message,
-//     error: {}
-//   });
-// });
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render("/common/error", {
+    message: err.message,
+    error: {}
+  });
+});
 
 
 module.exports = app;
