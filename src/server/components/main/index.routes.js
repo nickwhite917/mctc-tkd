@@ -5,7 +5,7 @@ var Product = require('../registration/registration.model.js');
 
 
 router.get('/', function(req, res, next) {
-  return res.render(__dirname + '/main/index.view', {
+  return res.render("main/index_view", {
     user: req.user,
     message: req.flash('message')[0]
   });

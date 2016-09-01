@@ -1,4 +1,4 @@
-var Registration = require('../registration');
+var Registration = require('./registration.model');
 var passport = require('passport');
 
 var seedRegistration = function () {
