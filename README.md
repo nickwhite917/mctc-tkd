@@ -1,7 +1,6 @@
 [![Build Status](https://travis-ci.org/nickwhite917/mctc-tkd.svg?branch=product-load)](https://travis-ci.org/nickwhite917/mctc-tkd)
 
 The back-end API includes:
-
 1. User auth
 1. Stripe integration
 1. Testing via Mocha and Chai as well as Istanbul for code coverage
@@ -15,9 +14,7 @@ The back-end API includes:
 1. Update the key on line 1 of *src/client/js/main.js*
 1. Run `mongod` in a seperate terminal window
 1. Run the app - `npm start` or `gulp`
-
-> The database, if empty, is seeded with an admin user - username: *ad@min.com* / password: *admin*
-
+2. 
 ## Development Workflow
 
 1. Create feature branch
@@ -40,63 +37,3 @@ With code coverage:
 ```sh
 $ npm run cov
 ```
-
-## Changelog
-
-1. 02/09/2016 - refactored passport, tests, error handlers, client-side javascript (view [commit](https://github.com/mjhea0/node-stripe-charge/commit/f32c6eb731dbf14b194ac07795671931100139b4))
-1. 04/23/2015 - major refactor
-1. 03/11/2015 - updated to Express 4.x
-
-## JSON API Documentation
-
-Admin required for all routes!
-
-### Users
-
-- GET `/api/v1/users` - get all users
-- GET `/api/v1/users/:id` - get user
-- POST `/api/v1/users` - create user
-- PUT `/api/v1/users/:id` - update user
-- DELETE `/api/v1/users/:id` - delete user
-
-### Products
-
-- GET `/products` - get all products
-- GET `/products/:id` - get products
-- POST `/products` - create products
-- PUT `/products/:id` - update products
-- DELETE `/products/:id` - delete products
-
-### Store
-
-- GET `/stores` - get all stores
-- GET `/store/:id` - get store
-- POST `/stores` - create store
-- PUT `/store/:id` - update store
-- DELETE `/store/:id` - delete store (need to test)
-
-### Plan (todo)
-
-- GET `/plans` - get all plans
-- GET `/plan/:id` - get plan
-- POST `/plans` - create plan
-- PUT `/plan/:id` - update plan
-- DELETE `/plan/:id` - delete plan
-
-## Screenshots
-
-### Main Page
-
-![main](https://raw.github.com/mjhea0/node-stripe-charge/master/images/main.png)
-
-### Charge Page
-
-![charge](https://raw.github.com/mjhea0/node-stripe-charge/master/images/charge.png)
-
-### Successful Charge
-
-![success](https://raw.github.com/mjhea0/node-stripe-charge/master/images/success.png)
-
-### Admin Page
-
-![admin](https://raw.github.com/mjhea0/node-stripe-charge/master/images/admin.png)
